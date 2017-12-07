@@ -20,7 +20,8 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: [
-          'babel-loader'
+          'babel-loader',
+          "eslint-loader"
         ]
       },
       {
@@ -46,4 +47,4 @@ module.exports = {
     // Use NoErrorsPlugin for webpack 1.x
     new webpack.NoEmitOnErrorsPlugin()
   ]
-};
+}
