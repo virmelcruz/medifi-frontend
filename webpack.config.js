@@ -9,6 +9,11 @@ module.exports = {
     'webpack-hot-middleware/client',
     './src/index.js'
   ],//entry point for the project,
+  devServer: {
+    contentBase: './public',
+    historyApiFallback: true,
+    hot: true
+  },
   output: { //outputs the bundle files
     path: path.join(__dirname, 'public'),
     publicPath: '/',
