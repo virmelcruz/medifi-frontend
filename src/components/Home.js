@@ -3,12 +3,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Route, Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import './Home.styles.scss'
 
-const propTypes = {}
+import { loginRequest } from '../actions/auth'
 
-const defaultProps = {}
+const propTypes = {
+  loading: PropTypes.bool.isRequired,
+  token: PropTypes.string,
+  errorMessage: PropTypes.string,
+  loginRequest: PropTypes.func.isRequired
+}
+
+const defaultProps = {
+  token: null
+}
 
 class Home extends Component {
   constructor(props) {
@@ -17,7 +26,17 @@ class Home extends Component {
   }
 
   handleSubmit() {
-    this.props.submitLoginRequest(this.state.email, this.state.password)
+    this.props.loginRequest(this.state.email, this.state.password)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.token !== this.props.token) {
+      console.log(nextProps.token)
+      this.props.history.push("/consultation")
+    }
+    if (nextProps.errorMessage != null) {
+      alert(nextProps.errorMessage)
+    }
   }
 
   render() {
@@ -31,22 +50,20 @@ class Home extends Component {
 
     return (
       <div>
-        <h3>Consult now!</h3>
-        <form id="login-form">
+          <h3>Consult now!</h3>
           <div className="form-text-field-container">
-            <input type="email" name="email" placeholder="Email" onChange={onEmailChange} />
+              <input type="email" name="email" placeholder="Email" onChange={onEmailChange} />
           </div>
           <div className="form-text-field-container">
-            <input type="password" name="password" placeholder="Password" onChange={onPasswordChange} />
+              <input type="password" name="password" placeholder="Password" onChange={onPasswordChange} />
           </div>
-          <button type="submit" className="form-btn" onClick={this.handleSubmit}>Login</button>
-        </form>
-        <div>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-        <div>
-          <Link to="/consultation">Try for free!</Link>
-        </div>
+          <button type="button" className="form-btn" onClick={this.handleSubmit}>Login</button>
+          <div>
+              <Link to="/signup">Sign Up</Link>
+          </div>
+          <div>
+              <Link to="/consultation">Try for free!</Link>
+          </div>
       </div>
     )
   }
@@ -55,4 +72,16 @@ class Home extends Component {
 Home.propTypes = propTypes
 Home.defaultProps = defaultProps
 
-export default connect()(Home)
+const mapStateToProps = (state) => {
+  return {
+    loading: state.auth.loading,
+    token: state.auth.token,
+    errorMessage: state.auth.errorMessage
+  }
+}
+
+const mapDispatchToProps = {
+  loginRequest
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home))
