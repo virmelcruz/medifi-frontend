@@ -5,7 +5,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import './SignUp.styles.scss'
 
-const propTypes = {}
+const propTypes = {
+  signupRequest: PropTypes.func.isRequired
+}
 
 const defaultProps = {}
 
@@ -16,7 +18,7 @@ class SignUp extends Component {
   }
 
   handleSubmit() {
-    this.props.submitSignupRequest(this.state.email, this.state.password)
+    this.props.signupRequest(this.state.email, this.state.password, this.state.firstName, this.state.lastName)
   }
 
   render() {
@@ -28,18 +30,29 @@ class SignUp extends Component {
       this.setState({password: e.target.value})
     }
 
+    let onFirstNameChange = (e) => {
+      this.setState({firstName: e.target.value})
+    }
+
+    let onLastNameChange = (e) => {
+      this.setState({lastName: e.target.value})
+    }
+
     return (
       <div>
-        <h3>Sign Up to Medifi</h3>
-        <form id="signup-form">
-          <div className="form-text-field-container">
-            <input type="email" name="email" placeholder="Email" onChange={onEmailChange} />
-          </div>
-          <div className="form-text-field-container">
-            <input type="password" name="password" placeholder="Password" onChange={onPasswordChange} />
-          </div>
-          <button type="submit" className="form-btn" onClick={this.handleSubmit}>Sign up</button>
-        </form>
+        <div className="form-text-field-container">
+          <input type="email" name="email" placeholder="Email" onChange={onEmailChange} />
+        </div>
+        <div className="form-text-field-container">
+          <input type="password" name="password" placeholder="Password" onChange={onPasswordChange} />
+        </div>
+        <div className="form-text-field-container">
+          <input type="text" name="first_name" placeholder="First Name" onChange={onFirstNameChange} />
+        </div>
+        <div className="form-text-field-container">
+          <input type="text" name="last_name" placeholder="Last Name" onChange={onLastNameChange} />
+        </div>
+        <button type="submit" className="form-btn" onClick={this.handleSubmit}>Sign up</button>
       </div>
     )
   }

@@ -1,22 +1,17 @@
 'use strict'
 
 import Home from './components/Home'
-import SignUp from './components/SignUp'
-import Consultation from './components/Consultation'
+import Landing from './components/Landing'
 
 const routes = [
   {
     path: '/',
-    component: Home,
+    component: Landing,
     exact: true
   },
   {
-    path: '/signup',
-    component: SignUp
-  },
-  {
-    path: '/consultation',
-    component: Consultation
+    path: '/home',
+    component: Home
   }
 ]
 

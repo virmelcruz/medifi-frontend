@@ -9,13 +9,12 @@ export function loginRequest (email, password) {
   return (dispatch) => {
     dispatch(loginRequestStart)
 
-    axios.post('http://localhost:3001/graphql', {
+    axios.post('http://localhost:3000/graphql', {
       query: `mutation { signInUser(email: "${email}", password: "${password}") }`
     }).then(function (response) {
       if (response.data.errors == null) {
         dispatch(loginSuccess(response.data.data.signInUser))
       } else {
-        console.log(response)
         dispatch(loginFailed(response.data.errors[0].message))
       }
     }).catch(function (error) {
