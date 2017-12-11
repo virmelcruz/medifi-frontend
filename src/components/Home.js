@@ -12,22 +12,22 @@ const defaultProps = {}
 
 class Home extends Component {
   constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit() {
-    this.props.submitLoginRequest(this.state.email, this.state.password);
+    this.props.submitLoginRequest(this.state.email, this.state.password)
   }
 
   render() {
     let onEmailChange = (e) => {
-      this.setState({email: e.target.value});
-    };
+      this.setState({email: e.target.value})
+    }
 
     let onPasswordChange = (e) => {
-      this.setState({password: e.target.value});
-    };
+      this.setState({password: e.target.value})
+    }
 
     return (
       <div>
@@ -48,7 +48,7 @@ class Home extends Component {
           <Link to="/consultation">Try for free!</Link>
         </div>
       </div>
-    );
+    )
   }
 }
 

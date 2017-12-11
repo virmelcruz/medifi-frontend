@@ -11,22 +11,22 @@ const defaultProps = {}
 
 class SignUp extends Component {
   constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit() {
-    this.props.submitSignupRequest(this.state.email, this.state.password);
+    this.props.submitSignupRequest(this.state.email, this.state.password)
   }
 
   render() {
     let onEmailChange = (e) => {
-      this.setState({email: e.target.value});
-    };
+      this.setState({email: e.target.value})
+    }
 
     let onPasswordChange = (e) => {
-      this.setState({password: e.target.value});
-    };
+      this.setState({password: e.target.value})
+    }
 
     return (
       <div>
